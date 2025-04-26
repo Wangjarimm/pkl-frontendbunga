@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Student</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./src/css/add_student.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<div class="app-container">
+  <!-- Sidebar (same as your main page) -->
+  <div class="sidebar">
+    <!-- Your existing sidebar content -->
+  </div>
+
+  <div class="app-content">
+    <div class="app-content-header">
+      <h1 class="app-content-headerText">Add New Student</h1>
+      <button class="mode-switch" title="Switch Theme">
+        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+      </button>
+      <button class="app-content-headerButton" onclick="window.location.href='index.html'">Back to Students</button>
+    </div>
+    
+    <div class="student-form-container">
+      <form id="studentForm" class="student-form">
+        <div class="form-section">
+          <h2 class="form-section-title">Student Information</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nis" class="form-label">NIS</label>
+              <input type="text" id="nis" name="nis" class="form-input" required placeholder="Enter student NIS">
+            </div>
+            
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" name="name" class="form-input" required placeholder="Enter student name">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="class" class="form-label">Class</label>
+              <select id="class" name="class" class="form-select" required>
+                <option value="" disabled selected>Select class</option>
+                <option value="X IPA 1">X IPA 1</option>
+                <option value="X IPA 2">X IPA 2</option>
+                <option value="X IPS 1">X IPS 1</option>
+                <option value="XI IPA 1">XI IPA 1</option>
+                <option value="XI IPA 2">XI IPA 2</option>
+                <option value="XI IPS 1">XI IPS 1</option>
+                <option value="XII IPA 1">XII IPA 1</option>
+                <option value="XII IPA 2">XII IPA 2</option>
+                <option value="XII IPS 1">XII IPS 1</option>
+                <option value="XII IPS 2">XII IPS 2</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="status" class="form-label">Payment Status</label>
+              <div class="status-options">
+                <label class="status-option">
+                  <input type="radio" name="status" value="lunas" required>
+                  <span class="status-option-label paid">Paid</span>
+                </label>
+                <label class="status-option">
+                  <input type="radio" name="status" value="belum lunas">
+                  <span class="status-option-label unpaid">Unpaid</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="form-button cancel" onclick="window.location.href='staff.html'">Cancel</button>
+          <button type="submit" class="form-button submit">Add Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="./src/js/add_student.js"></script>
+</body>
+</html>

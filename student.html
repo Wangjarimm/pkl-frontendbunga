@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Siswa - Pembayaran</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/css/student.css"> <!-- Link ke file CSS eksternal -->
+</head>
+<body>
+  <div class="dashboard">
+    <h2>Selamat datang!</h2>
+    <!-- <div class="info">
+      <p><strong>Kelas:</strong> XI RPL</p>
+      <p><strong>NIS:</strong> 123456789</p>
+    </div> -->
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Cari jenis tagihan..." />
+      <select id="filterStatus">
+        <option value="">Semua Status</option>
+        <option value="lunas">Lunas</option>
+        <option value="belum">Belum Lunas</option>
+      </select>
+    </div>
+
+    <h3>Tagihan Anda:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jenis Tagihan</th>
+          <th>Jumlah</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SPP Bulan April</td>
+          <td>Rp200.000</td>
+          <td><span class="status-belum">Belum Lunas</span></td>
+          <td><a href="#" class="btn-bayar">Bayar</a></td>
+        </tr>
+        <tr>
+          <td>Uang Buku</td>
+          <td>Rp150.000</td>
+          <td><span class="status-lunas">Lunas</span></td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Seragam</td>
+          <td>Rp300.000</td>
+          <td><span class="status-belum">Belum Lunas</span></td>
+          <td><a href="form_pembayaran.html" class="btn-bayar">Bayar</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="total">Total Belum Dibayar: <span style="color:red;">Rp500.000</span></p>
+  </div>
+
+  <script src="student.js"></script>
+</body>
+</html>

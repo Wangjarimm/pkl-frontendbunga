@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Pembayaran</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f6ff;
+      padding: 30px;
+      color: #1e3a8a;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 90%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 20px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Form Pembayaran</h2>
+    <form id="formPembayaran">
+      <!-- Kolom NIS -->
+      <label for="nis">NIS</label>
+      <input type="text" id="nis" name="nis" required />
+
+      <!-- Kolom Nama -->
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="nama" required />
+
+      <!-- Kolom Kelas -->
+      <label for="kelas">Kelas</label>
+      <input type="text" id="kelas" name="kelas" required />
+
+      <!-- Kolom Jurusan -->
+      <label for="jurusan">Jurusan</label>
+      <input type="text" id="jurusan" name="jurusan" required />
+
+      <!-- Kolom VA Number -->
+      <label for="va_number">VA Number</label>
+      <input type="text" id="va_number" name="va_number" required />
+
+      <!-- Kolom Catatan -->
+      <label for="note">Catatan (Opsional)</label>
+      <input type="text" id="note" name="note" />
+
+      <!-- Kolom Jumlah Pembayaran -->
+      <label for="amount">Jumlah Pembayaran (Rp)</label>
+      <input type="number" id="amount" name="amount" required />
+
+      <!-- Kolom Tanggal Setor -->
+      <label for="tanggal_setor">Tanggal Setor</label>
+      <input type="date" id="tanggal_setor" name="tanggal_setor" required />
+
+      <!-- Tombol Kirim -->
+      <button type="submit" class="btn">Kirim Pembayaran</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("formPembayaran").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        nis: document.getElementById("nis").value, // Mengirimkan NIS
+        nama: document.getElementById("nama").value, // Nama siswa
+        kelas: document.getElementById("kelas").value, // Kelas
+        jurusan: document.getElementById("jurusan").value, // Jurusan
+        va_number: document.getElementById("va_number").value,
+        note: document.getElementById("note").value,
+        amount: parseInt(document.getElementById("amount").value),
+        tanggal_setor: document.getElementById("tanggal_setor").value
+      };
+
+      fetch("http://localhost:8000/api/payments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.data) {
+          alert("Pembayaran berhasil disimpan!");
+          console.log(response);
+          localStorage.setItem("pembayaranData", JSON.stringify(data)); // simpan data ke localStorage
+          window.location.href = "pembayaran_sukses.html";
+
+        } else {
+          alert("Terjadi kesalahan: " + (response.message || 'Unknown error'));
+          console.log(response);
+        }
+      })
+      .catch(error => {
+        alert("Gagal mengirim data pembayaran.");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

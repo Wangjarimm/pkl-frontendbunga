@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SMK Infokom Kota Bogor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <style>
+    body {
+      background-color: #e3f4fd;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .content-wrapper {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .header img {
+      width: 250px;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      color: #3dbff0;
+      font-weight: 600;
+    }
+
+    .card-row {
+    display: flex;
+    justify-content: center;      /* Tengah horizontal */
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 800px;            /* Biar gak terlalu lebar */
+    margin: 0 auto;               /* Pusatkan row */
+    padding: 2rem 1rem;           /* Ruang di sekitar konten */
+    }
+
+    .portal-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .portal-card h2 {
+      color: #3dbff0;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .portal-card a {
+      background-color: #3dbff0;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .portal-card a:hover {
+      background-color: #1aaee4;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/Wangjarimm/pickmeup/main/infokom_1717115721-removebg-preview.png" alt="logo">
+        <h1>Selamat Datang di Administrasi SMK Infokom Kota Bogor</h1>
+        <p>Silakan pilih akses masuk sesuai kebutuhan Anda.</p>
+      </div>
+
+      <div class="card-row">
+        <div class="portal-card">
+          <h2>Login Siswa</h2>
+          <a href="login.html">Masuk</a>
+        </div>
+
+        <div class="portal-card">
+          <h2>Login Staff</h2>
+          <a href="login_staff.html">Masuk</a>
+        </div>
+
+        <div class="portal-card">
+          <h2>Daftar Akun Siswa</h2>
+          <a href="register.html">Daftar</a>
+        </div>
+        
+        <div class="portal-card">
+          <h2>Daftar Akun Staff</h2>
+          <a href="register_staff.html">Daftar</a>
+        </div>
+      </div>
+
+      <footer>
+        &copy; 2025 SMK Infokom Kota Bogor. All rights reserved.
+      </footer>
+    </div>
+  </div>
+
+</body>
+</html>

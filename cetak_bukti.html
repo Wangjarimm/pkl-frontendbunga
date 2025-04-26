@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cetak Bukti Pembayaran</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    /* Aturan untuk tampilan di browser */
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      background: #f0f6ff;
+      text-align: center;
+    }
+
+    #slip-container {
+    background: white;
+    color: black;
+    padding: 20px;
+    width: 650px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 8px;
+    }
+
+    .btn-group {
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    /* Aturan untuk cetakan */
+    @media print {
+      body {
+        padding: 0;
+        background: none;
+        text-align: left;
+      }
+
+      #slip-container {
+        display: block;
+        width: 100%;
+        margin: 0;
+        border: none;
+      }
+
+      .btn-group {
+        display: none;
+      }
+
+      .btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Slip Pembayaran Berhasil</h2>
+
+  <div id="slip-container">
+    <h3 style="margin:0;">BANK MINI<br>SMK INFOKOM BOGOR</h3>
+    <p style="margin:0;">Jl. Letjen Ibrahim Adjie No.178, Sindang Barang Loji, Bogor</p>
+    <hr>
+
+    <p><strong>Virtual Account:</strong> <span id="va_print"></span></p>
+    <p><strong>Nama Siswa:</strong> <span id="nama_print"></span></p>
+    <p><strong>Tingkat:</strong> <span id="tingkat_print"></span></p>
+    <p><strong>Jurusan / Kelas:</strong> <span id="jurusan_print"></span> / <span id="kelas_print"></span></p>
+    <p><strong>Catatan:</strong> <span id="catatan_print"></span></p>
+    <p><strong>Tanggal Setor:</strong> <span id="tanggal_print"></span></p>
+    <hr>
+
+    <table>
+      <tr>
+        <th>SETORAN</th>
+        <th>Rp.</th>
+      </tr>
+      <tr>
+        <td>Jumlah Setoran</td>
+        <td><span id="amount_print"></span></td>
+      </tr>
+      <tr>
+        <td>Biaya Administrasi</td>
+        <td>2.500</td>
+      </tr>
+      <tr>
+        <td><strong>TOTAL SETOR</strong></td>
+        <td><strong><span id="total_setor_print"></span></strong></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+    <button class="btn" onclick="downloadPDF()">📥 Simpan PDF</button>
+  </div>
+
+  <script>
+    // Ambil data dari localStorage
+    const data = JSON.parse(localStorage.getItem("pembayaranData"));
+
+    if (data) {
+      document.getElementById("va_print").innerText = data.va_number || "-";
+      document.getElementById("nama_print").innerText = data.nama || "-";
+      document.getElementById("tingkat_print").innerText = data.kelas?.split(" ")[0] || "-";
+      document.getElementById("kelas_print").innerText = data.kelas || "-";
+      document.getElementById("jurusan_print").innerText = data.jurusan || "-";
+      document.getElementById("catatan_print").innerText = data.note || "-";
+      document.getElementById("tanggal_print").innerText = data.tanggal_setor || "-";
+      document.getElementById("amount_print").innerText = parseInt(data.amount).toLocaleString('id-ID');
+
+      const total = parseInt(data.amount) + 2500;
+      document.getElementById("total_setor_print").innerText = total.toLocaleString('id-ID');
+
+      // Tampilkan slip setelah data dimuat
+      document.getElementById("slip-container").style.display = "block";
+    } else {
+      alert("Data pembayaran tidak ditemukan.");
+    }
+
+    // Fungsi untuk simpan PDF
+    function downloadPDF() {
+      const element = document.getElementById("slip-container");
+      const opt = {
+        margin:       [0.5, 0.5, 0.5, 0.5], // Atur margin sesuai kebutuhan
+        filename:     `Bukti_Pembayaran_${data.nama || 'siswa'}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 4 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>

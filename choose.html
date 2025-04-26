@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pilih Tindakan Pembayaran</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f6ff;
+      padding: 30px;
+      color: #1e3a8a;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 20px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 10px;
+    }
+    .btn-cetak {
+      background-color: #34D399;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Silakan Pilih Tindakan</h2>
+    <p>Pembayaran berhasil disimpan. Apa yang ingin Anda lakukan selanjutnya?</p>
+    
+    <!-- Tombol untuk melanjutkan pembayaran -->
+    <a href="pembayaran_lanjut.html" class="btn">Lanjutkan Pembayaran</a>
+
+    <!-- Tombol untuk mencetak -->
+    <a href="cetak_bukti.html" class="btn btn-cetak">Cetak Bukti Pembayaran</a>
+  </div>
+</body>
+</html>

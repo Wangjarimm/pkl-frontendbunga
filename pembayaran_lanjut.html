@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Pembayaran</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-7EFOtkWbw9fDLeMA"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f6ff;
+      padding: 30px;
+      color: #1e3a8a;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .info {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .btn-bayar {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      padding: 12px;
+      background-color: #2563eb;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .btn-bayar:disabled {
+      background-color: #a5b4fc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Detail Pembayaran</h2>
+    <div id="dataPembayaran">
+      <p class="info">Memuat data...</p>
+    </div>
+
+    <button id="btnBayar" class="btn-bayar">Lanjutkan ke Pembayaran</button>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("pembayaranData"));
+    const container = document.getElementById("dataPembayaran");
+    const btnBayar = document.getElementById("btnBayar");
+  
+    if (data) {
+      container.innerHTML = `
+        <p class="info"><strong>NIS:</strong> ${data.nis}</p>
+        <p class="info"><strong>Nama:</strong> ${data.nama}</p>
+        <p class="info"><strong>Kelas:</strong> ${data.kelas}</p>
+        <p class="info"><strong>Jurusan:</strong> ${data.jurusan}</p>
+        <p class="info"><strong>VA Number:</strong> ${data.va_number}</p>
+        <p class="info"><strong>Jumlah:</strong> Rp ${Number(data.amount).toLocaleString()}</p>
+        <p class="info"><strong>Tanggal Setor:</strong> ${data.tanggal_setor}</p>
+        <p class="info"><strong>Catatan:</strong> ${data.note || '-'}</p>
+      `;
+    } else {
+      container.innerHTML = `<p class="info">Data pembayaran tidak ditemukan.</p>`;
+      btnBayar.disabled = true;
+    }
+  
+    btnBayar.addEventListener("click", function () {
+      if (!data) return alert("Data tidak ditemukan.");
+  
+      fetch("http://localhost:8000/api/transaksi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.snap_token) {
+          // Menyimpan snap_token di localStorage (jika perlu)
+          localStorage.setItem("snap_token", res.snap_token);
+  
+          // Menggunakan Snap.js untuk menampilkan halaman pembayaran
+          snap.pay(res.snap_token, {
+            onSuccess: function(result) {
+              console.log("Transaksi berhasil:", result);
+              alert("Pembayaran berhasil!");
+              // Kamu bisa melakukan sesuatu setelah pembayaran berhasil, seperti mengubah status transaksi di database.
+            },
+            onPending: function(result) {
+              console.log("Pembayaran tertunda:", result);
+              alert("Pembayaran tertunda.");
+            },
+            onError: function(result) {
+              console.error("Error pembayaran:", result);
+              alert("Terjadi kesalahan saat memproses pembayaran.");
+            }
+          });
+        } else {
+          alert("Gagal mendapatkan token pembayaran.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Terjadi kesalahan saat memproses pembayaran.");
+      });
+    });
+  </script>
+  
+</body>
+</html>

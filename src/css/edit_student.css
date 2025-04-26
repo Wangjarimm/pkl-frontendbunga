@@ -1,0 +1,241 @@
+/* Base styles from main style.css */
+:root {
+    --app-bg: #101827;
+    --sidebar: rgba(21, 30, 47, 1);
+    --app-content-main-color: #fff;
+    --app-content-secondary-color: #1d283c;
+    --action-color: #2869ff;
+    --action-color-hover: #6291fd;
+    --table-border: #1a2131;
+    --filter-reset: #2c394f;
+    --filter-shadow: rgba(16, 24, 39, 0.8) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+  
+  .light:root {
+    --app-bg: #fff;
+    --sidebar: #f3f6fd;
+    --app-content-main-color: #1f1c2e;
+    --app-content-secondary-color: #f3f6fd;
+    --action-color: #2869ff;
+    --action-color-hover: #6291fd;
+    --table-border: #e0e0e0;
+    --filter-reset: #e0e0e0;
+    --filter-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  .app-content-headerButton {
+      background-color: var(--action-color);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+  }
+    
+  .app-content-headerButton:hover {
+      background-color: var(--action-color-hover);
+      transform: scale(1.05);
+  }
+  
+  .mode-switch {
+      margin-left: 10px;
+      background-color: var(--action-color);
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      font-weight: 300;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .mode-switch :hover {
+      background-color: var(--action-color-hover);
+      transform: scale(1.05);
+  }
+  
+      
+  
+  /* Form Container */
+  .student-form-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  .student-form {
+    background-color: var(--app-content-secondary-color);
+    border-radius: 8px;
+    padding: 50px;
+    box-shadow: var(--filter-shadow);
+  }
+  
+  /* Form Sections */
+  .form-section {
+    margin-bottom: 30px;
+  }
+  
+  .form-section-title {
+    color: var(--app-content-main-color);
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--table-border);
+  }
+  
+  /* Form Layout */
+  .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+  }
+    
+  .form-group {
+      flex: 1 1 45%;
+  }
+    
+  
+  
+  /* Form Elements */
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--app-content-main-color);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .form-input,
+  .form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--table-border);
+    border-radius: 6px;
+    background-color: var(--app-bg);
+    color: var(--app-content-main-color);
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--action-color);
+    box-shadow: 0 0 0 2px rgba(40, 105, 255, 0.2);
+  }
+  
+  .form-input::placeholder {
+    color: rgba(var(--app-content-main-color), 0.5);
+  }
+  
+  /* Status Options */
+  .status-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+  }
+  
+  .status-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .status-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .status-option-label {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  
+  .status-option-label.paid {
+    background-color: rgba(43, 169, 114, 0.2);
+    color: #2ba972;
+  }
+  
+  .status-option-label.unpaid {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+  }
+  
+  .status-option input:checked + .status-option-label.paid {
+    background-color: #2ba972;
+    color: white;
+  }
+  
+  .status-option input:checked + .status-option-label.unpaid {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--table-border);
+  }
+  
+  .form-button {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .form-button.cancel {
+    background-color: transparent;
+    border: 1px solid var(--table-border);
+    color: var(--app-content-main-color);
+  }
+  
+  .form-button.cancel:hover {
+    background-color: rgba(var(--app-content-main-color), 0.1);
+  }
+  
+  .form-button.submit {
+    background-color: var(--action-color);
+    border: 1px solid var(--action-color);
+    color: white;
+  }
+  
+  .form-button.submit:hover {
+    background-color: var(--action-color-hover);
+    border-color: var(--action-color-hover);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .student-form {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .form-button {
+      width: 100%;
+    }
+  }
